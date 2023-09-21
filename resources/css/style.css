@@ -1,0 +1,8 @@
+.image-about {
+    width: 300px;
+}
+@media (min-width: 576px) {
+    .image-about {
+        width: 40px;
+    }
+}
