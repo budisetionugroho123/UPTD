@@ -53,13 +53,13 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
+      <h1>{{$title}}</h1>
+      {{-- <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
-      </nav>
+      </nav> --}}
     </div><!-- End Page Title -->
     @yield('content')
 
@@ -86,8 +86,43 @@
   <script>
       // let table = new DataTable('#table');
       new DataTable('#table', {
-          scrollX: true
+        fixedColumns: {
+        left: 1,
+        right: 1
+    },
+    paging: true,
+    scrollCollapse: true,
+    scrollX: true,
+    scrollY: 300
+         
       });
+
+  </script>
+  <script>
+      // let table = new DataTable('#table');
+      new DataTable('#table-wihtout-scroll', {
+        fixedColumns: {
+        left: 1,
+        right: 1
+    },
+    paging: true,
+      });
+
+  </script>
+  <script>
+      // let table = new DataTable('#table');
+      new DataTable('#table-analisis', {
+        fixedColumns: {
+        left: 1,
+        right: 1
+    },
+    scrollX: true,
+    paging: false,
+    ordering: false,
+        info:     false,
+        searching : false
+      });
+      
 
   </script>
 </body>

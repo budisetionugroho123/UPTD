@@ -21,17 +21,13 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid' => Str::uuid(),
-            'name' => 'Kepala Lab',
+            'name' => 'Manager Teknis Lab',
             'email' => 'budisetionugroho0001@gmail.com',
-            'role' => 'kepala_lab',
-            'password' => Hash::make('kepalalab123'),
+            'role' => 'manager_teknis',
+            'password' => Hash::make('teknis123'),
             'no_hp' => '082283646581',
         ]);
         $role = [
-            [
-                'role' => 'kepala_lab',
-                'label' => 'Kepala Laboratorium'
-            ],
             [
                 'role' => 'manager_teknis',
                 'label' => 'Manager Teknis'
@@ -47,6 +43,10 @@ class UserSeeder extends Seeder
             [
                 'role' => 'admin_frontoffice',
                 'label' => 'Admin Front Office'
+            ],
+            [
+                'role' => 'customer',
+                'label' => 'Customer'
             ],
         ];
         foreach ($role as $r) {

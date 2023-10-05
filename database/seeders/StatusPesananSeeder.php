@@ -29,29 +29,19 @@ class StatusPesananSeeder extends Seeder
                 'label' => 'Proses Analisis'
             ],
             [
-                'status' => 'analisis_selesai_waiting_validasi',
-                'label' => 'Analisis Selesai & Waiting Validasi'
+                'status' => 'proses_validasi_data',
+                'label' => 'Proses Validasi Data'
             ],
             [
-                'status' => 'lolos_validasi_data',
-                'label' => 'Lolos Validasi Data'
+                'status' => 'proses_pengesahan_shu',
+                'label' => 'Proses Pengesahan SHU'
             ],
+
             [
-                'status' => 'tidak_lolos_validasi_data',
-                'label' => 'Tidak Lolos Validasi Data'
+                'status' => 'pengesahan_shu_selesai',
+                'label' => 'Pengesahan SHU Selesai'
             ],
-            [
-                'status' => 'lolos_validasi_berkas',
-                'label' => 'Lolos Validasi Berkas (LHUS & SHU)'
-            ],
-            [
-                'status' => 'tidak_lolos_validasi_berkas',
-                'label' => 'Tidak Lolos Validasi Berkas (LHUS & SHU)'
-            ],
-            [
-                'status' => 'sudah_disahkan',
-                'label' => 'Sudah Disahkan'
-            ],
+
         ];
         foreach ($dataStatus as $status) {
             StatusPesanan::create($status);

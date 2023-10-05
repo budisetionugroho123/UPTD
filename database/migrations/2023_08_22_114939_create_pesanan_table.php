@@ -2,6 +2,7 @@
 
 use App\Models\Layanan;
 use App\Models\Pengujian;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ class CreatePesananTable extends Migration
     {
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->references('id')->on('users')->cascadeOnDelete();
             $table->foreignIdFor(Layanan::class)->references('id')->on('layanan')->cascadeOnDelete();
             $table->string('nama_perusahaan');
             $table->string('alamat_perusahaan');

@@ -21,11 +21,20 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
         // dd($credentials);
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            if ($user->role == 'customer') {
+                return back()->with('errors', "Customer tidak memiliki akses");
+            }
+        }
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('/dashboard');
         }
-        $user = User::where('email', $request->email)->first();
+
+
         if (!$user) {
             $message = "email tidak ditemukan";
         } else {

@@ -12,7 +12,7 @@
             <p class="display-6 my-5 text-center"><strong>FORMULIR PERMINTAAN DATANG KE LOKASI</strong></p>
             <div class="col border-form rounded p-5">
 
-                <form onsubmit="return submitOrderLab()" action="{{route('order.lab.create')}}" method="POST">
+                <form onsubmit="return submitOrderLab()" action="{{route('order.loc.create')}}" method="POST">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-1 order-lg-1">

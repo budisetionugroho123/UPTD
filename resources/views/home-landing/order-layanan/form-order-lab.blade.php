@@ -11,7 +11,7 @@
         <div class="row mb-5">
             <p class="display-6 my-5 text-center"><strong>FORMULIR PERMINTAAN UJI LABORATORIUM</strong></p>
             <div class="col border-form rounded p-5">
-                <form onsubmit="return submitOrderLab()" method="POST">
+                <form onsubmit="return submitOrderLab()" method="POST" action="{{route('order.lab.create')}}">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-1 order-lg-1">
@@ -99,9 +99,9 @@
                             <label for="volume_uji_coba">Volume Contoh uji yang akan dibawa</label>
                             <select class="form-select" name="volume_uji_coba" id="volume_uji_coba">
                                 <option value="">Pilih Volume</option>
-                                <option value="1000">1000 ml</option>
-                                <option value="1500">1500 ml</option>
-                                <option value="2000">2000 ml</option>
+                                <option value="1000 ml">1000 ml</option>
+                                <option value="1500 ml">1500 ml</option>
+                                <option value="2000 ml">2000 ml</option>
                             </select>          
                             <div class="font-italic text-danger d-none" id="errorVolumeUjiCoba">
                                 Mohon masukkan volume uji coba!

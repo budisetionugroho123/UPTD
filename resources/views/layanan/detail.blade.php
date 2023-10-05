@@ -11,62 +11,62 @@
                   
               @endif --}}
                 <form action="{{route('edit.layanan')}}" method="post" onsubmit="return submitEditLayanan()">
-                  @csrf
-                  <input type="hidden" name="id" value="{{$data['layanan']['id']}}">
-                    <div class="form-group row mb-3">
-                      <label for="nama_layanan" class="col-sm-2 col-form-label">Nama Layanan</label>
-                      <div class="col-sm-10">
-                        <input type="text" name="nama_layanan" class="form-control" id="nama_layanan" value="{{old('nama_layanan', $data['layanan']['nama_layanan'])}}" >
-                        <small id="errorNamaLayanan" class="text-danger text-italic d-none">Mohon masukkan nama layanan</small>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                      <label for="jenis_sampel" class="col-sm-2 col-form-label">Jenis Sampel</label>
-                      <div class="col-sm-10">
-                        <input type="text" name="jenis_sampel" class="form-control" id="jenis_sampel" value="{{old('jenis_sampel', $data['layanan']['jenis_sampel'])}}" >
-                        <small id="errorJenisSampel" class="text-danger text-italic d-none">Mohon masukkan jenis sampel</small>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                      <label for="identitas_layanan" class="col-sm-2 col-form-label">Identitas Layanan</label>
-                      <div class="col-sm-10">
-                        <input type="text" name="identitas_layanan" class="form-control" id="identitas_layanan" value="{{old('identitas_layanan', $data['layanan']['identitas_layanan'])}}" >
-                        <small id="errorIdentitasLayanan" class="text-danger text-italic d-none">Mohon masukkan identitas layanan</small>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                      <label for="acuan_pengambilan_sampel" class="col-sm-2 col-form-label">Acuan Sampel</label>
-                      <div class="col-sm-10">
-                        <input type="text" name="acuan_pengambilan_sampel" class="form-control" id="acuan_pengambilan_sampel" value="{{old('acuan_pengambilan_sampel', $data['layanan']['acuan_pengambilan_sampel'])}}" >
-                        <small id="errorAcuan" class="text-danger text-italic d-none">Mohon masukkan acuan pengambilan sampel</small>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                      <label for="antarLab" class="col-sm-2 col-form-label">Diizinkan Antar Ke Lab</label>
-                      <div class="col-sm-10">
-                        <select name="antar_lab" id="antar_lab" class="form-select" >
-                          <option value="{{$data['layanan']['antar_lab']}}">{{$data['layanan']['antar_lab'] == true ? 'Diizinkan' : "Tidak Diizinkan"}}</option>                          <option value="1">Diizinkan</option>
-                          <option value="0">Tidak Diizinkan</option>
-                        </select>
-                        <small id="errorAntarLab" class="text-danger text-italic d-none">Mohon pilih untuk perizinan antar ke lab</small>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                      <label for="datang_ke_lokasi" class="col-sm-2 col-form-label">Datang Ke Lokasi Pengambilan Sampel</label>
-                      <div class="col-sm-10">
-                        <select name="datang_ke_lokasi" id="datang_ke_lokasi" class="form-select" >
-                          <option value="{{$data['layanan']['datang_ke_lokasi']}}">{{$data['layanan']['datang_ke_lokasi'] == true ? 'Diizinkan' : "Tidak Diizinkan"}}</option>
-                          <option value="1">Diizinkan</option>
-                          <option value="0">Tidak Diizinkan</option>
-                        </select>
-                        <small id="errorLokasi" class="text-danger text-italic d-none">Mohon pilih untuk perizinan datang ke lokasi pengambilan sampel</small>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Ubah</button>
-                      </div>
-                    </div>
+                    @csrf
+                    <input type="hidden" name="id" value="{{$data['layanan']['id']}}">
+                        <div class="form-group row mb-3">
+                        <label for="nama_layanan" class="col-sm-2 col-form-label">Nama Layanan</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nama_layanan" class="form-control" id="nama_layanan" value="{{old('nama_layanan', $data['layanan']['nama_layanan'])}}" >
+                            <small id="errorNamaLayanan" class="text-danger text-italic d-none">Mohon masukkan nama layanan</small>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                        <label for="jenis_sampel" class="col-sm-2 col-form-label">Jenis Sampel</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="jenis_sampel" class="form-control" id="jenis_sampel" value="{{old('jenis_sampel', $data['layanan']['jenis_sampel'])}}" >
+                            <small id="errorJenisSampel" class="text-danger text-italic d-none">Mohon masukkan jenis sampel</small>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                        <label for="identitas_layanan" class="col-sm-2 col-form-label">Identitas Layanan</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="identitas_layanan" class="form-control" id="identitas_layanan" value="{{old('identitas_layanan', $data['layanan']['identitas_layanan'])}}" >
+                            <small id="errorIdentitasLayanan" class="text-danger text-italic d-none">Mohon masukkan identitas layanan</small>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                        <label for="acuan_pengambilan_sampel" class="col-sm-2 col-form-label">Acuan Sampel</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="acuan_pengambilan_sampel" class="form-control" id="acuan_pengambilan_sampel" value="{{old('acuan_pengambilan_sampel', $data['layanan']['acuan_pengambilan_sampel'])}}" >
+                            <small id="errorAcuan" class="text-danger text-italic d-none">Mohon masukkan acuan pengambilan sampel</small>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                        <label for="antarLab" class="col-sm-2 col-form-label">Diizinkan Antar Ke Lab</label>
+                        <div class="col-sm-10">
+                            <select name="antar_lab" id="antar_lab" class="form-select" >
+                            <option value="{{$data['layanan']['antar_lab']}}">{{$data['layanan']['antar_lab'] == true ? 'Diizinkan' : "Tidak Diizinkan"}}</option>                          <option value="1">Diizinkan</option>
+                            <option value="0">Tidak Diizinkan</option>
+                            </select>
+                            <small id="errorAntarLab" class="text-danger text-italic d-none">Mohon pilih untuk perizinan antar ke lab</small>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                        <label for="datang_ke_lokasi" class="col-sm-2 col-form-label">Datang Ke Lokasi Pengambilan Sampel</label>
+                        <div class="col-sm-10">
+                            <select name="datang_ke_lokasi" id="datang_ke_lokasi" class="form-select" >
+                            <option value="{{$data['layanan']['datang_ke_lokasi']}}">{{$data['layanan']['datang_ke_lokasi'] == true ? 'Diizinkan' : "Tidak Diizinkan"}}</option>
+                            <option value="1">Diizinkan</option>
+                            <option value="0">Tidak Diizinkan</option>
+                            </select>
+                            <small id="errorLokasi" class="text-danger text-italic d-none">Mohon pilih untuk perizinan datang ke lokasi pengambilan sampel</small>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Ubah</button>
+                        </div>
+                        </div>
                   </form>
             </div>
         </div>

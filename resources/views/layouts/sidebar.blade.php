@@ -32,13 +32,35 @@
       <li class="nav-heading">Service</li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
+        <a class="nav-link   {{ Route::currentRouteName() != "order.index" ? 'collapsed' : "" }}" href="{{route('order.index')}}">
             <i class="fa fa-book"></i>
-            <span>Pesanan</span>
+            <span class="">Pesanan</span>
         </a>
       </li><!-- End Pesanan Page Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+
+      <li class="nav-item " >
+        <a class="nav-link  {{Request::route()->getName() == 'analisis.index' || Request::route()->getName()== 'analisis.progres' || Request::route()->getName()== 'proses.analisis' ? 'active-sidebar': 'collapsed'}}"  data-bs-target="#pengujian-nav" data-bs-toggle="collapse"  href="#">
+          <i class="fa fa-microscope" ></i><span>Pengujian</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        
+        <ul id="pengujian-nav" class="nav-content collapse {{Request::route()->getName() == 'analisis.index' || Request::route()->getName()== 'analisis.progres'  || Request::route()->getName()== 'proses.analisis' ? 'show': ''}} " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{route('analisis.index')}}">
+              <i class="bi bi-circle "></i><span class="{{Request::route()->getname() == 'analisis.index'   || Request::route()->getName()== 'analisis.progres'? 'active-dropdown' : ''}}">Penentuan Penguji</span>
+            </a>
+            <a href="{{route('proses.analisis')}}">
+              <i class="bi bi-circle "></i><span class="{{Request::route()->getname() == 'proses.analisis' ? 'active-dropdown' : ''}}">Proses Analisa</span>
+            </a>
+            <a href="{{route('hasil.analisis')}}">
+              <i class="bi bi-circle "></i><span class="{{Request::route()->getname() == 'analisis.index' ? 'active-dropdown' : ''}}">Hasil Analisa</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
+      {{-- <li class="nav-item">
+        <a class="nav-link {{ Route::currentRouteName() != "analisis.index" ? 'collapsed' : "" }}" href="{{route('analisis.index')}}">
             <i class="fa fa-microscope"></i>
             <span>Pengujian</span>
         </a>
@@ -49,7 +71,7 @@
             <i class="fa fa-flask"></i>
             <span>Hasil Pengujian</span>
         </a>
-      </li><!-- End Profile Page Nav -->
+      </li><!-- End Profile Page Nav --> --}}
 
 
       <li class="nav-heading">Settings</li>

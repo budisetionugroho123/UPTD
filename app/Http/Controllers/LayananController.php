@@ -14,7 +14,7 @@ class LayananController extends Controller
     public function create()
     {
         $this->authorize('kepala_lab');
-        return view('layanan.create');
+        return view('layanan.create', ['title' => 'Tambah Layanan']);
     }
     public function list()
     {
@@ -23,7 +23,8 @@ class LayananController extends Controller
         $data = [
             'layanan' => $layanan
         ];
-        return view('layanan.list', compact('data'));
+        $title = 'Daftar Layanan';
+        return view('layanan.list', compact('data', 'title'));
     }
     public function detail($id)
     {
@@ -34,7 +35,8 @@ class LayananController extends Controller
         $data = [
             'layanan' => $layanan,
         ];
-        return view('layanan.detail', compact('data'));
+        $title = "Detail Layanan";
+        return view('layanan.detail', compact('data', 'title'));
     }
     public function edit(Request $request)
     {

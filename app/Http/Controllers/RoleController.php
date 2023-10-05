@@ -13,11 +13,12 @@ class RoleController extends Controller
     public function index()
     {
         $this->authorize('kepala_lab');
-        $users = User::where('role', '!=', 'pelanggan')->get();
-        $title = 'Hapus Data!';
+        $users = User::where('role', '!=', 'customer')->get();
+        $titleConfirmDelete = 'Hapus Data!';
         $text = "kamu yakin untuk menghapus?";
-        confirmDelete($title, $text);
-        return view('role.index', compact('users'));
+        confirmDelete($titleConfirmDelete, $text);
+        $title = "Daftar Pengguna";
+        return view('role.index', compact('users', 'title'));
     }
     public function deleteUser($id)
     {
@@ -34,7 +35,8 @@ class RoleController extends Controller
     {
         $roles = Role::where('role', '!=', 'customer')->get();
         return view('role.create', [
-            'roles' => $roles
+            'roles' => $roles,
+            'title' => 'Tambah Pengguna'
         ]);
     }
     public function store(Request $request)
