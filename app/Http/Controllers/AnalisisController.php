@@ -254,9 +254,6 @@ class AnalisisController extends Controller
         return view('analisis.hasil-analisis.index', [
             'title' => 'Daftar Hasil Analisis ',
             'orders' => $orders,
-            // 'listPerusahaan' => $listNamaPerusahaan,
-            // 'listLayanan' => $listLayanan,
-            // 'listStatus' => $listStatus,
         ]);
     }
     public function detailHasilAnalisis($id)
@@ -324,7 +321,7 @@ class AnalisisController extends Controller
             return back()->with('toast_error', 'Masih terdapat pengujian yang belum valid');
         }
         $pesanan = Pesanan::find($id);
-        $pesanan->status =  "proses_pengesahan_shu";
+        $pesanan->status_pesanan =  "proses_pengesahan_shu";
         $pesanan->update();
 
         return redirect()->route('hasil.analisis')->with('toast_success', 'Berhasil validasi data analisis pesanan');
