@@ -9,6 +9,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PengujianController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShuController;
 use App\Http\Controllers\UserController;
 use App\Models\Pengujian;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,7 @@ Route::get('/register-customer', [CustomerAuthController::class, 'registerCustom
 Route::post('/register-customer', [CustomerAuthController::class, 'createCustomer'])->name('register.customer.store');
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //order layanan
 Route::prefix('order-layanan')->group(function () {
     Route::get('/order', [HomeController::class, 'orderLayanan'])->name('order.layanan');
@@ -53,8 +54,20 @@ Route::prefix('order-layanan')->group(function () {
 Route::prefix('pesanan')->group(function () {
     Route::post('/create-loc', [OrderController::class, 'createOrderLoc'])->name('order.loc.create');
     Route::post('/create-lab', [OrderController::class, 'createOrderLab'])->name('order.lab.create');
+
+    //order diproses
     Route::get('/', [OrderController::class, 'index'])->name('order.index');
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('order.detail');
+
+    // order completed
+    Route::get('/pesanan-selesai', [OrderController::class, 'orderCompleted'])->name('order.completed');
+    Route::get('/pesanan-selesai/{id}', [OrderController::class, 'orderCompletedDetail'])->name('order.completed.detail');
+
+    //order cancel
+    Route::get('/pesanan-batal', [OrderController::class, 'orderCancel'])->name('order.cancel');
+    Route::get('/pesanan-batal/{id}', [OrderController::class, 'orderCancelDetail'])->name('order.cancel.detail');
+
+
     Route::get('/konfirmasi/{id}', [OrderController::class, 'konfirmasi'])->name('order.konfirmasi');
     Route::get('/konfirmasi-pembayaran/{id}', [OrderController::class, 'konfirmasiPembayaran'])->name('order.konfirmasi.pembayaran');
     Route::get('/batalkan/{id}', [OrderController::class, 'batalkanPesanan'])->name('order.batalkan');
@@ -72,6 +85,17 @@ Route::prefix('analisis')->group(function () {
     Route::post('/validasi-hasil-analisis', [AnalisisController::class, 'validasiHasilAnalisis'])->name('validasi.hasil.analisis');
     Route::get('/lolos-validasi/{id}', [AnalisisController::class, 'lolosValidasi'])->name('lolos.validasi');
 });
+Route::prefix('shu')->group(function () {
+    Route::get('/', [ShuController::class, 'index'])->name('list.shu');
+    Route::get('/detail/{id}', [ShuController::class, 'detail'])->name('detail.shu');
+    // Route::get('/valid', [ShuController::class, 'shuValid'])->name('shu.valid');
+    Route::get('/generate-shu/{id}', [ShuController::class, 'generateShu'])->name('generate.shu');
+    Route::get('/validasi-shu/{id}', [ShuController::class, 'validasiShu'])->name('validasi.shu');
+});
+
+
+
+
 Route::prefix('layanan')->group(function () {
     Route::get('/create', [LayananController::class, 'create'])->name('layanan.create');
     Route::post('/create', [LayananController::class, 'storeLayanan'])->name('add.layanan');
@@ -113,5 +137,6 @@ Route::prefix('role')->group(function () {
 });
 
 Route::prefix('customer')->group(function () {
-    Route::get('/', [CustomerController::class, 'dataPesanan'])->name('customer.pesanan.index');
+    Route::get('/pesanan', [CustomerController::class, 'dataPesanan'])->name('customer.pesanan.index');
+    Route::get('/pesanan/{id}', [CustomerController::class, 'pesananDetail'])->name('customer.pesanan.detail');
 });

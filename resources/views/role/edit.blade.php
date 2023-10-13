@@ -59,13 +59,14 @@
                     <small id="errorRole" class="text-danger text-italic d-none">Mohon pilih role</small>
                     </div>
                 </div>
-                @if ($user->role == "kepala_lab")
+                @if ($user->role == "manager_teknis")
                     <div class="form-group row mb-3">
                         <label for="ttd" class="col-sm-2 col-form-label">TTD Pengesahan</label>
                         <div class="col-sm-10">
                             <input type="file" name="ttd" class="form-control" id="ttd"  >
                             {{-- <small id="errorNoHp" class="text-danger text-italic d-none">Mohon masukkan no hp</small> --}}
                         </div>
+                        <a href="/images/ttd/{{$user->ttd}}" target="_blank">Klik untuk melihat ttd</a>
                     </div>
                 
                 @endif

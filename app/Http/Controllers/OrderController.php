@@ -22,62 +22,32 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $this->authorize('pesanan');
-        $orders = [];
         $listNamaPerusahaan = DB::table('pesanan')->distinct()->get(['nama_perusahaan']);
         $listLayanan = Layanan::get(['id', 'nama_layanan']);
-        $listStatus = StatusPesanan::all();
         $params = $request->all();
         if (isset($params) && !empty($params)) {
-            if (!empty($params['nama_layanan']) && !empty($params['nama_perusahaan']) && !empty($params['status_pesanan'])) {
-                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->where('nama_perusahaan', $params['nama_perusahaan'])->get();
-            } else if (!empty($params['nama_layanan']) && empty($params['nama_perusahaan']) && empty($params['status_pesanan'])) {
-                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->get();
-            } else if (empty($params['nama_layanan']) && !empty($params['nama_perusahaan']) && empty($params['status_pesanan'])) {
-                $orderModel = Pesanan::where('nama_perusahaan', $params['nama_perusahaan'])->get();
-            } else if (empty($params['nama_layanan']) && empty($params['nama_perusahaan']) && !empty($params['status_pesanan'])) {
-                $orderModel = Pesanan::where('status_pesanan', $params['status_pesanan'])->get();
+
+            if (!empty($params['nama_layanan']) && !empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->whereNotIn('status_pesanan', ['pengesahan_shu_selesai', 'pesanan_dibatalkan'])->where('nama_perusahaan', $params['nama_perusahaan'])->get();
+            } else if (!empty($params['nama_layanan']) && empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->whereNotIn('status_pesanan', ['pengesahan_shu_selesai', 'pesanan_dibatalkan'])->get();
+            } else if (empty($params['nama_layanan']) && !empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('nama_perusahaan', $params['nama_perusahaan'])->whereNotIn('status_pesanan', ['pengesahan_shu_selesai', 'pesanan_dibatalkan'])->get();
             } else {
-                $orderModel = Pesanan::all();
+                $orderModel = Pesanan::whereNotIn('status_pesanan', ['pengesahan_shu_selesai', 'pesanan_dibatalkan'])->get();
             }
         } else {
-            $orderModel = Pesanan::all();
+            $orderModel = Pesanan::whereNotIn('status_pesanan', ['pengesahan_shu_selesai', 'pesanan_dibatalkan'])->get();
         }
         // dd($orderModel);
-        foreach ($orderModel as $order) {
-            $orders[] = [
-                'id' => $order->id,
-                'nama_perusahaan' => $order->nama_perusahaan,
-                'alamat_perusahaan' => $order->alamat_perusahaan,
-                'telephone' => $order->telephone,
-                'nama_pic' => $order->nama_pic,
-                'no_pic' => $order->no_pic,
-                'email_pic' => $order->email_pic,
-                'nama_layanan' => [
-                    'id' => $order->layanan_id,
-                    'label' => Layanan::find($order->layanan_id)->nama_layanan
-                ],
-                'jenis_layanan' => $order->jenis_layanan ==  "datang_ke_lokasi" ? "Datang Ke Lokasi" : "Datang Ke Laboratorium",
-                'status_pesanan' => [
-                    'id' => $order->status_pesanan,
-                    'label' => StatusPesanan::where('status', $order->status_pesanan)->first()->label
-                ],
-                'tanggal_pengantaran' => $order->tanggal_pengantaran,
-                'identitas_sampel' => $order->identitas_sampel,
-                'tanggal_pengambilan' => $order->tanggal_pengambilan,
-                'alamat_pengambilan_sampel' => $order->alamat_pengambilan_sampel,
-                'volume_uji_coba' => $order->volume_uji_coba,
-                'total_harga' => $order->total_harga,
-                'status_pembayaran' => $order->is_paid == 1 ? "Sudah Membayar" : "Belum Membayar",
+        $orders = $this->mappingPesanan($orderModel);
 
-            ];
-        }
         // dd($orders);
         return view('pesanan-admin.index', [
             'title' => 'Daftar Pesanan',
             'orders' => $orders,
             'listPerusahaan' => $listNamaPerusahaan,
             'listLayanan' => $listLayanan,
-            'listStatus' => $listStatus,
         ]);
     }
     public function detail($id)
@@ -89,11 +59,23 @@ class OrderController extends Controller
         $pesanan->label_status = StatusPesanan::where('status', $pesanan->status_pesanan)->first()->label;
         $listPenguji = User::where('role', 'analisis_lab')->get();
 
+
+        $orders = DB::table('pesanan')
+            ->select('analisis.*', 'pengujian.baku_mutu')
+            ->join('analisis', 'analisis.pesanan_id', '=', 'pesanan.id')
+            ->join('pengujian', 'pengujian.id', '=', 'analisis.pengujian_id')
+            ->where('pesanan.id', $id)
+            ->get();
+
+
+        $statusPesanan = StatusPesanan::where('status', $pesanan->status_pesanan)->first()->label;
         // dd($pesanan);
         return view('pesanan-admin.detail', [
             'title' => 'Detail Pesanan',
             'pesanan' => $pesanan,
+            'orders' => $orders,
             'daftarPenguji' => $listPenguji,
+            'statusPesanan' => $statusPesanan,
             'listAnalisa' => $listAnalisa
         ]);
     }
@@ -225,7 +207,7 @@ class OrderController extends Controller
             ];
             if (isset($request->inputSatuan)) {
                 $hargaPengujian = Pengujian::whereIn('id', $request->inputSatuan)->sum('tarif');
-                $data['total_harga'] = $hargaPengujian;
+                $data['total_harga'] = $hargaPengujian + 500000;
                 // dd($data);
                 $pesanan = Pesanan::create($data);
                 $identitas = Layanan::find($data['layanan_id'])->identitas_layanan;
@@ -252,6 +234,7 @@ class OrderController extends Controller
             } else {
                 $hargaPengujian = Pengujian::where('layanan_id', $request->layanan_id)->sum('tarif');
                 $data['total_harga'] = $hargaPengujian + 500000;
+                // dd($data);
                 // dd($data);
                 $pesanan = Pesanan::create($data);
                 $identitas = Layanan::find($data['layanan_id'])->identitas_layanan;
@@ -330,5 +313,154 @@ class OrderController extends Controller
     public function batalkanPesanan($id)
     {
         $this->authorize('pesanan');
+
+        $pesanan = Pesanan::find($id);
+        $pesanan->status_pesanan = "pesanan_dibatalkan";
+        $pesanan->update();
+        return redirect()->route('order.index')->with('success', "Pesanan berhasil dikonfirmasi");
+    }
+
+
+    public function orderCompleted(Request $request)
+    {
+        $this->authorize('pesanan');
+        $listNamaPerusahaan = DB::table('pesanan')->distinct()->get(['nama_perusahaan']);
+        $listLayanan = Layanan::get(['id', 'nama_layanan']);
+        $params = $request->all();
+        if (isset($params) && !empty($params)) {
+
+            if (!empty($params['nama_layanan']) && !empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->where('status_pesanan', 'pengesahan_shu_selesai')->where('nama_perusahaan', $params['nama_perusahaan'])->get();
+            } else if (!empty($params['nama_layanan']) && empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->where('status_pesanan', 'pengesahan_shu_selesai')->get();
+            } else if (empty($params['nama_layanan']) && !empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('nama_perusahaan', $params['nama_perusahaan'])->where('status_pesanan', 'pengesahan_shu_selesai')->get();
+            } else {
+                $orderModel = Pesanan::where('status_pesanan', 'pengesahan_shu_selesai')->get();
+            }
+        } else {
+            $orderModel = Pesanan::where('status_pesanan', 'pengesahan_shu_selesai')->get();
+        }
+        // dd($orderModel);
+        $orders = $this->mappingPesanan($orderModel);
+
+        return view('pesanan-admin.completed.index', [
+            'title' => 'Daftar Pesanan',
+            'orders' => $orders,
+            'listPerusahaan' => $listNamaPerusahaan,
+            'listLayanan' => $listLayanan,
+        ]);
+    }
+
+    public function orderCompletedDetail($id)
+    {
+        $this->authorize('pesanan');
+
+        $orders = DB::table('pesanan')
+            ->select('analisis.*', 'pengujian.baku_mutu')
+            ->join('analisis', 'analisis.pesanan_id', '=', 'pesanan.id')
+            ->join('pengujian', 'pengujian.id', '=', 'analisis.pengujian_id')
+            ->where('pesanan.id', $id)
+            ->get();
+
+
+        $order = Pesanan::with('layanan')->find($id);
+        $statusPesanan = StatusPesanan::where('status', $order->status_pesanan)->first()->label;
+        // dd($order);
+        // dd($orders);
+        return view('pesanan-admin.completed.detail', [
+            'title' => 'Detail Pesanan',
+            'orders' => $orders,
+            'pesanan' => $order,
+            'statusPesanan' => $statusPesanan
+        ]);
+    }
+    public function mappingPesanan($orderModel)
+    {
+        $orders = [];
+        foreach ($orderModel as $order) {
+            $orders[] = [
+                'id' => $order->id,
+                'nama_perusahaan' => $order->nama_perusahaan,
+                'alamat_perusahaan' => $order->alamat_perusahaan,
+                'telephone' => $order->telephone,
+                'nama_pic' => $order->nama_pic,
+                'no_pic' => $order->no_pic,
+                'email_pic' => $order->email_pic,
+                'nama_layanan' => [
+                    'id' => $order->layanan_id,
+                    'label' => Layanan::find($order->layanan_id)->nama_layanan
+                ],
+                'jenis_layanan' => $order->jenis_layanan ==  "datang_ke_lokasi" ? "Datang Ke Lokasi" : "Datang Ke Laboratorium",
+                'status_pesanan' => [
+                    'id' => $order->status_pesanan,
+                    'label' => StatusPesanan::where('status', $order->status_pesanan)->first()->label
+                ],
+                'tanggal_pengantaran' => $order->tanggal_pengantaran,
+                'identitas_sampel' => $order->identitas_sampel,
+                'tanggal_pengambilan' => $order->tanggal_pengambilan,
+                'alamat_pengambilan_sampel' => $order->alamat_pengambilan_sampel,
+                'volume_uji_coba' => $order->volume_uji_coba,
+                'total_harga' => $order->total_harga,
+                'status_pembayaran' => $order->is_paid == 1 ? "Sudah Membayar" : "Belum Membayar",
+
+            ];
+        }
+        return $orders;
+    }
+    public function orderCancel(Request $request)
+    {
+        $this->authorize('pesanan');
+        $listNamaPerusahaan = DB::table('pesanan')->distinct()->get(['nama_perusahaan']);
+        $listLayanan = Layanan::get(['id', 'nama_layanan']);
+        $params = $request->all();
+        if (isset($params) && !empty($params)) {
+
+            if (!empty($params['nama_layanan']) && !empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->where('status_pesanan', 'pesanan_dibatalkan')->where('nama_perusahaan', $params['nama_perusahaan'])->get();
+            } else if (!empty($params['nama_layanan']) && empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('layanan_id', $params['nama_layanan'])->where('status_pesanan', 'pesanan_dibatalkan')->get();
+            } else if (empty($params['nama_layanan']) && !empty($params['nama_perusahaan'])) {
+                $orderModel = Pesanan::where('nama_perusahaan', $params['nama_perusahaan'])->where('status_pesanan', 'pesanan_dibatalkan')->get();
+            } else {
+                $orderModel = Pesanan::where('status_pesanan', 'pesanan_dibatalkan')->get();
+            }
+        } else {
+            $orderModel = Pesanan::where('status_pesanan', 'pesanan_dibatalkan')->get();
+        }
+        // dd($orderModel);
+        $orders = $this->mappingPesanan($orderModel);
+
+        return view('pesanan-admin.canceled.index', [
+            'title' => 'Daftar Pesanan',
+            'orders' => $orders,
+            'listPerusahaan' => $listNamaPerusahaan,
+            'listLayanan' => $listLayanan,
+        ]);
+    }
+
+    public function orderCancelDetail($id)
+    {
+        $this->authorize('pesanan');
+
+        $orders = DB::table('pesanan')
+            ->select('analisis.*', 'pengujian.baku_mutu')
+            ->join('analisis', 'analisis.pesanan_id', '=', 'pesanan.id')
+            ->join('pengujian', 'pengujian.id', '=', 'analisis.pengujian_id')
+            ->where('pesanan.id', $id)
+            ->get();
+
+
+        $order = Pesanan::with('layanan')->find($id);
+        $statusPesanan = StatusPesanan::where('status', $order->status_pesanan)->first()->label;
+        // dd($statusPesanan);
+        // dd($order);
+        // dd($orders);
+        return view('pesanan-admin.canceled.detail', [
+            'title' => 'Detail Pesanan',
+            'orders' => $orders,
+            'pesanan' => $order,
+            'statusPesanan' => $statusPesanan
+        ]);
     }
 }

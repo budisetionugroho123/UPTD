@@ -22,8 +22,14 @@
                         <input type="text" name="nama_perusahaan" disabled class="form-control" id="nama_perusahaan" value="{{$order->identitas_sampel}}" >
                     </div>
                 </div>
+                <div class="form-group row mb-3">
+                    <label for="status_pesanan" class="col-sm-2 col-form-label">Status Pesanan</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="status_pesanan" disabled class="form-control" id="status_pesanan" value="{{$statusPesanan}}" >
+                    </div>
+                </div>
             </form>
-            <form action="{{route('validasi.hasil.analisis')}}" method="POST">
+            <form>
                 @csrf
                 <input type="hidden" name="pesanan_id" value="{{$order->id}}">
                 <table class="table border table-bordered table-striped" id="table-analisis" style="width: 100%">
@@ -74,8 +80,8 @@
                         @endforeach
                     </tbody>
                 </table >
-                <button type="submit" class="btn btn-sm btn-primary mr-5 mt-3">Simpan</button>
-                <a href="{{route('lolos.validasi', $order->id)}}" class=" btn btn-sm btn-primary ml-5 pl-5 mt-3">Lolos Validasi</a>
+                <a href="{{route('generate.shu', $order->id)}}" class=" btn btn-sm btn-primary ml-5 pl-5 mt-3">Generate PDF</a>
+                <a href="{{route('validasi.shu', $order->id)}}" class=" btn btn-sm btn-primary ml-5 pl-5 mt-3">Validasi Shu</a>
 
             </form>
         </div>

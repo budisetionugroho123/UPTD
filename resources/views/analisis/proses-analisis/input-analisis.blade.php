@@ -50,7 +50,7 @@
                             @endif                            
                             <td>{{$order->baku_mutu}}</td>
                             <td>
-                                <input type="text" class="form-control" {{($order->status=="Menunggu Validasi" || $order->status=="Valid" ? 'disabled' : "")}} name="analisis_{{$order->id}}[]" value="{{$order->hasi_uji}}">
+                                <input type="text" class="form-control" {{($order->status=="Menunggu Validasi" || $order->status=="Valid" ? 'disabled' : "")}} name="analisis_{{$order->id}}[]" value="{{$order->hasil_uji}}">
                             </td>
                             <td>
                                 <input type="text" class="form-control" {{($order->status=="Menunggu Validasi" || $order->status=="Valid" ? 'disabled' : "")}} name="analisis_{{$order->id}}[]" value="{{$order->keterangan}}">

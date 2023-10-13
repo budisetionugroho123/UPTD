@@ -23,7 +23,7 @@ class CreateHasilPengujianTable extends Migration
             $table->string('nama_pengujian');
             $table->string('satuan');
             $table->string('status');
-            $table->float('hasi_uji');
+            $table->string('hasi_uji');
             $table->string('keterangan');
             $table->timestamps();
         });

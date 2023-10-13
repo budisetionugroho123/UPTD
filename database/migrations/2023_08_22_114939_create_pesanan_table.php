@@ -34,7 +34,7 @@ class CreatePesananTable extends Migration
             $table->dateTime('tanggal_pengambilan')->nullable();
             $table->string('volume_uji_coba')->nullable();
             $table->string('alamat_pengambilan_sampel')->nullable();
-            $table->float('total_harga', 8, 2)->nullable();
+            $table->bigInteger('total_harga')->nullable();
             $table->boolean('is_paid')->nullable();
             $table->timestamps();
         });

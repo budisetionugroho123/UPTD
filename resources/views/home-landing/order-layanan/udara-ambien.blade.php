@@ -27,7 +27,7 @@
                 <p class="lead">
                     Order sekarang atau hubungi kami untuk mendapatkan informasi lengkap untuk layanan ini.
                 </p>
-                <a href="/order-layanan/order" class="btn btn-primary btn-sm rounded">Order Layanan</a>
+                <a href="/order-layanan/order" class="btn button-custom btn-sm rounded">Order Layanan</a>
             </div>
         </div>
 

@@ -66,17 +66,21 @@ class RoleController extends Controller
         $roles = Role::where('role', '!=', 'customer')->get();
         return view('role.edit', [
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
+            'title' => 'Detail Pengguna'
         ]);
     }
     public function editStore(Request $request)
     {
 
         $request->validate([
-            'photo' => 'mimes:jpg,jpeg,png|max:2048'
+            'photo' => 'mimes:jpg,jpeg,png|max:2048',
+            'ttd' => 'mimes:jpg,jpeg,png|max:2048',
         ], [
             'photo.mimes' => 'Mohon input foto dengan tipe png,jpeg,jpg.',
-            'photo.max' => 'File tidak boleh lebih dari 2 Mb.'
+            'photo.max' => 'File tidak boleh lebih dari 2 Mb.',
+            'ttd.mimes' => 'Mohon input foto dengan tipe png,jpeg,jpg.',
+            'ttd.max' => 'File tidak boleh lebih dari 2 Mb.'
         ]);
         // dd($request->photo->getClientOriginalName());
         $data = [
@@ -91,6 +95,13 @@ class RoleController extends Controller
 
             // $request->photo->move(public_path("images/photo", $filename));
             $data['photo'] = $name;
+        }
+        if (!is_null($request->ttd)) {
+            $name  =  time() . "_" . $request->file('ttd')->getClientOriginalName();
+            $request->ttd->move(public_path('images/ttd'), $name);
+
+            // $request->ttd->move(public_path("images/ttd", $filename));
+            $data['ttd'] = $name;
         }
         User::find($request->id)->update($data);
         return redirect('/role')->with('success', 'Berhasil mengubah data pengguna');

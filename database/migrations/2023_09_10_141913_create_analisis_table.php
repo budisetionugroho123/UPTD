@@ -22,7 +22,7 @@ class CreateAnalisisTable extends Migration
             $table->integer('id_penguji')->nullable();
             $table->string('nama_pengujian');
             $table->string('satuan')->nullable();
-            $table->float('hasi_uji')->nullable();
+            $table->string('hasil_uji')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

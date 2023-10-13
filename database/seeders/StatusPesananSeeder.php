@@ -17,6 +17,10 @@ class StatusPesananSeeder extends Seeder
         //
         $dataStatus = [
             [
+                'status' => 'pesanan_dibatalkan',
+                'label' => 'Pesanan Dibatalkan'
+            ],
+            [
                 'status' => 'belum_konfirmasi',
                 'label' => 'Belum konfirmasi'
             ],
@@ -26,11 +30,7 @@ class StatusPesananSeeder extends Seeder
             ],
             [
                 'status' => 'proses_analisis',
-                'label' => 'Proses Analisis'
-            ],
-            [
-                'status' => 'proses_validasi_data',
-                'label' => 'Proses Validasi Data'
+                'label' => 'Proses Analisa'
             ],
             [
                 'status' => 'proses_pengesahan_shu',
