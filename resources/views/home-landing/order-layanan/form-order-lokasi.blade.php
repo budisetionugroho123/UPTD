@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-8 order-lg-9">
                             <label for="tanggal_pengambilan">Tanggal Pengambilan Uji Coba</label>
-                            <input  onkeyup="removeError()" type="text" id="tanggal_pengambilan" name="tanggal_pengambilan" class="form-control  border-input tanggal_pengambilan">   
+                            <input  onkeyup="removeError()" type="date" id="tanggal_pengambilan" name="tanggal_pengambilan" class="form-control  border-input tanggal_pengambilan">   
                             <div class="font-italic text-danger d-none" id="errorTanggalPengambilan">
                                 Mohon masukkan tanggal pengambilan uji coba!
                             </div>                     
@@ -117,7 +117,7 @@
         </div>
     </div>
     <script src="/js/formPesanan.js"></script>
-    <script>
+    {{-- <script>
         $( document ).ready(function() {
             if ($(".tanggal_pengambilan").length) 
       {
@@ -137,6 +137,6 @@
         }
     
         });
-    </script>
+    </script> --}}
 
 @endsection

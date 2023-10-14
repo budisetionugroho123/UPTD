@@ -76,14 +76,14 @@
                         </div>
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-6 order-lg-7">
                             <label for="nama_pic">Nama PIC Yang bisa dihubungi</label>
-                            <input type="text" id="nama_pic" name="nama_pic" class="form-control">  
+                            <input  onkeyup="removeError()" type="text" id="nama_pic" name="nama_pic" class="form-control">  
                             <div class="font-italic text-danger d-none" id="errorNamaPic">
                                 Mohon masukkan nama PIC!
                             </div>                      
                         </div>
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-8 order-lg-8">
                             <label for="tanggal_pengantaran">Tanggal Pengantaran Contoh Uji</label>
-                            <input type="text" id="tanggal_pengantaran" name="tanggal_pengantaran" class="form-control tanggal_pengantaran">   
+                            <input type="date" onkeyup="removeError()" id="tanggal_pengantaran" name="tanggal_pengantaran" class="form-control tanggal_pengantaran">   
                             <div class="font-italic text-danger d-none" id="errorTanggalPengantaran">
                                 Mohon masukkan tanggal pengantaran!
                             </div>                     
@@ -97,7 +97,7 @@
                         </div> --}}
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-10 order-lg-10">
                             <label for="volume_uji_coba">Volume Contoh uji yang akan dibawa</label>
-                            <select class="form-select" name="volume_uji_coba" id="volume_uji_coba">
+                            <select  onchange="removeErrorOption()" class="form-select" name="volume_uji_coba" id="volume_uji_coba">
                                 <option value="">Pilih Volume</option>
                                 <option value="1000 ml">1000 ml</option>
                                 <option value="1500 ml">1500 ml</option>
@@ -127,7 +127,7 @@
         </div>
     </div>
     <script src="/js/formPesanan.js"></script>
-    <script>
+    {{-- <script>
         $( document ).ready(function() {
             if ($(".tanggal_pengantaran").length) 
       {
@@ -147,6 +147,6 @@
         }
     
         });
-    </script>
+    </script> --}}
 
 @endsection

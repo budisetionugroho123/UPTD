@@ -1,5 +1,10 @@
 
 function removeErrorOption(){
+    var volume_uji_coba = $("#volume_uji_coba").val();
+
+    if(volume_uji_coba != "" ) {
+        $("#errorVolumeUjiCoba").addClass("d-none");
+    }
     var jenis_pesanan = $("#jenis_pesanan").val();
     var layanan_id = $("#layanan_id").val();
     if(layanan_id != ""){
