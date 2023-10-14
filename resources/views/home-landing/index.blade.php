@@ -510,64 +510,38 @@
         <div class="container">
 
             <div class="section-title">
-            <h2>Team</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <h2>Sertifikat</h2>
             </div>
-
             <div class="row">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="member">
-                <img src="/Green/assets/img/team/team-1.jpg" alt="">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>
-                    Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-                </p>
-                <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch "  data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box iconbox-blue w-100 text-center">
+                    <div class="icon">
+                        <img src="/images-team/logo_KAN.png" style=" width: 50%" >
+                        <br>
+                        <small><strong>Komite Akreditasi Nasional <br> LP - 1512 - IDN <br> SNI ISO/IEC 17025-2017</strong></small>
+                    </div>
+                    <p class="pt-3"><strong>UPTD LABORATORIUM TANGERANG SELATAN </strong>Terakreditasi <strong>ISO/IEC 17025:2007</strong> oleh Komite Akreditasi Nasional dengan nomor <strong>LP - 1521 - IDN</strong></p>
+                    </div>
                 </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch "  data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box iconbox-blue w-100 text-center ">
+                    <div class="icon">
+                        <img src="/images-team/logo_kementrian.png" style=" width: 40%; height: 160px;" >
+                    </div>
+                    <p class="pt-3"><strong>UPTD LABORATORIUM TANGERANG SELATAN</strong> Teregistrasi oleh Kementian Lingkungan Hidup dan Kehutanan Republik Indonesia.</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="member">
-                <img src="/Green/assets/img/team/team-2.jpg" alt="">
-                <h4>Sarah Jhinson</h4>
-                <span>Product Manager</span>
-                <p>
-                    Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-                </p>
-                <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch "  data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box iconbox-blue w-100 text-center ">
+                    <div class="icon">
+                        <img src="/images-team/logo_sertifikat.png" style=" width: 40%; height: 160px;" >
+                        <br>
+                        <small><strong>Sertifikat</strong></small>
+                    </div>
+                    <p class="pt-3"><strong>UPTD LABORATORIUM TANGERANG SELATAN</strong></p>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="member">
-                <img src="/Green/assets/img/team/team-3.jpg" alt="">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <p>
-                    Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
-                </p>
-                <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-                </div>
-            </div>
-
-            </div>
-
         </div>
         </section><!-- End Team Section -->
 
