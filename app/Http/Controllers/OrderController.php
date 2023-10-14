@@ -81,19 +81,18 @@ class OrderController extends Controller
     }
     public function orderToLocation()
     {
-        $title = 'Delete Data!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
 
         return view('home-landing.order-layanan.form-order-lokasi', [
-            'title' => 'Petugas kami Datang ke Lokasi'
+            'title' => 'Petugas kami Datang ke Lokasi',
+            'services' => Layanan::where('datang_ke_lokasi', 1)->get()
 
         ]);
     }
     public function orderToLab()
     {
         return view('home-landing.order-layanan.form-order-lab', [
-            'title' => 'Datang ke Laboratorium'
+            'title' => 'Datang ke Laboratorium',
+            'services' => Layanan::where('antar_lab', 1)->get()
 
         ]);
     }

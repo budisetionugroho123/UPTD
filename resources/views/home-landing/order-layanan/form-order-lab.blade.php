@@ -53,10 +53,10 @@
                             <label for="layanan_id">Layanan yang Diinginkan</label>
                             <select  onchange="removeErrorOption()" class="form-select  border-input" name="layanan_id" id="layanan_id">
                                 <option value="">Pilih Layanan</option>
-                                <option value="1">Uji Kualitas Air Limbah</option>
-                                <option value="2">Uji Kualitas Air Higiene & Sanitasi</option>
-                                <option value="3">Uji Kualitas Air Permukaan</option>
-                                <option value="4">Uji Kualitas Udara Ambien</option>
+                                @foreach ($services as $service)
+                                    <option value="{{$service->id}}">{{$service->nama_layanan}}</option>                                    
+                                @endforeach
+
                               </select>   
                               <div class="font-italic text-danger d-none" id="errorLayanan">
                                 Mohon masukkan layanan!
