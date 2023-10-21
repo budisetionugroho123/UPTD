@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Layanan;
 use App\Models\Pesanan;
 use App\Models\StatusPesanan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -33,6 +36,8 @@ class CustomerController extends Controller
     }
     public function pesananDetail($id)
     {
+        $this->authorize('customer');
+
         $orders = DB::table('pesanan')
             ->select('analisis.*', 'pengujian.baku_mutu')
             ->join('analisis', 'analisis.pesanan_id', '=', 'pesanan.id')
@@ -49,5 +54,60 @@ class CustomerController extends Controller
             'order' => $order,
             'statusPesanan' => $statusPesanan
         ]);
+    }
+
+    public function profil()
+    {
+        $this->authorize('customer');
+
+        return view('home-landing.customer.akun', [
+            'user' => User::find(auth()->user()->id)
+        ]);
+    }
+    public function updateProfil(Request $request)
+    {
+        $validateData = $request->validate([
+            'email' => ['required', 'email',],
+            'no_hp' => ['required'],
+            'name' => ['required']
+        ], [
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email salah',
+            'no_hp.required' => 'No HP harus diisi',
+            'name.required' => 'Nama harus diisi',
+        ]);
+
+        $user = User::find($request->id);
+        if ($user->email != $request->email) {
+            $existingEmail = User::where('email', $request->email)->first();
+
+            if ($existingEmail) {
+                return back()->with('errors', 'Email sudah ada, silahkan menggunakan email lain');
+            }
+        }
+        $user->update($validateData);
+        return back()->with('success', 'Berhasil memperbarui data');
+    }
+
+    public function changePassword(Request $request)
+    {
+        // dd($request->input());
+        $validateData = $request->validate([
+            'password' => 'min:8',
+            'konfirmasiPassword' => 'min:8'
+        ], [
+            'password.min' => 'minimal panjang password adalah 8',
+            'konfirmasiPassword.min' => 'minimal panjang password adalah 8',
+        ]);
+        $user = User::find($request->id);
+
+        $checkPassword = Hash::check($request->passwordlama, $user->password);
+        if (!$checkPassword) {
+            return back()->with('error', 'Password lama salah');
+        }
+        $passwordHash = Hash::make($request->password);
+        $user->password = $passwordHash;
+        $user->update();
+        return redirect()->route('customer.profil')->with('success', 'Berhasil mengubah password');
     }
 }

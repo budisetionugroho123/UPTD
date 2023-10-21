@@ -137,6 +137,9 @@ Route::prefix('role')->group(function () {
 });
 
 Route::prefix('customer')->group(function () {
+    Route::get('/akun', [CustomerController::class, 'profil'])->name('customer.profil');
+    Route::post('/akun', [CustomerController::class, 'updateProfil'])->name('customer.profil.edit');
     Route::get('/pesanan', [CustomerController::class, 'dataPesanan'])->name('customer.pesanan.index');
+    Route::post('/ganti-password', [CustomerController::class, 'changePassword'])->name('customer.ganti.password');
     Route::get('/pesanan/{id}', [CustomerController::class, 'pesananDetail'])->name('customer.pesanan.detail');
 });

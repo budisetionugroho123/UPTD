@@ -53,12 +53,14 @@
     <div class="row   justify-content-center">
         <div class="col-lg-12 m-5">
             <form action="" class="mb-5">
-                <div class="form-group row mb-3">
-                    <label for="nama_perusahaan" class="col-sm-2 col-form-label">Cetak Shu</label>
-                    <div class="col-sm-10">
-                        <a class="btn icon-custom" href="{{route('generate.shu', $order->id)}}">Generate SHU PDF</a>
+                {{-- @if ($statusPesanan == "Pengesahan SHU Selesai") --}}
+                    <div class="form-group row mb-3">
+                        <label for="nama_perusahaan" class="col-sm-2 col-form-label">Cetak Shu</label>
+                        <div class="col-sm-10">
+                            <a class="btn icon-custom" href="{{route('generate.shu', $order->id)}}">Generate SHU PDF</a>
+                        </div>
                     </div>
-                </div>
+                {{-- @endif --}}
                 <div class="form-group row mb-3">
                     <label for="nama_perusahaan" class="col-sm-2 col-form-label">Nama Perusahaan</label>
                     <div class="col-sm-10">
