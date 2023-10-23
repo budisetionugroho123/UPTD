@@ -25,7 +25,7 @@
                 <button class="btn btn-primary w-100" type="submit">Masuk</button>
                 </div>
                 <div class="col-12">
-                    <p class="small custom-button mb-0 text-center"> <a href="pages-register.html">Lupa password?</a></p>
+                    <p class="small custom-button mb-0 text-center"> <a href="#" data-toggle="modal" data-target="#lupasPasswordModal">Lupa password?</a></p>
                 </div>
                 <div class="col-12">
                     <p class="small custom-button mb-0 text-center">Belum punya akun? <a href="{{route('register.customer')}}">Daftar Akun</a></p>
@@ -33,4 +33,36 @@
             </form>
         </div>
     </div>
+    <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="lupasPasswordModal" tabindex="-1" role="dialog" aria-labelledby="lupasPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered"  role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="lupasPasswordModalLabel">Lupa Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{route('lupa.password')}}" method="POST">
+            @csrf
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="email" required name="email" class="form-control" id="exampleInputEmail1"  placeholder="Masukkan email....">
+                    <div class="invalid-feedback">
+                        Mohon masukkan email
+                      </div>
+                </div>              
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
 @endsection

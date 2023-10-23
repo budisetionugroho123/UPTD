@@ -492,6 +492,49 @@
                             @endforeach
                         </tbody>
                       </table>
+
+
+                    <h4 class="text-center text-black">Biaya Pengambilan Sampel(Sampling)</h4>
+
+                    <table class="table  table-sm table-bordered ">
+                        <thead  class="thead-dark">
+                          <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">JENIS PENGAMBILAN SAMPEL</th>
+                            <th scope="col">METODE</th>
+                            <th scope="col">TARIF</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr>
+                                <th class="text-center" scope="row">1</th>
+                                <td>Sampling Kualitas Air Limbah</th>
+                                <td>SNI</td>
+                                <td>{{"RP " .number_format(500000,0,',','.');}}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" scope="row">2</th>
+                                <td>Sampling Kualitas Air Higiene & Sanitasi</th>
+                                <td>SNI</td>
+                                <td>{{"RP " .number_format(500000,0,',','.');}}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" scope="row">3</th>
+                                <td>Sampling Kualitas Air Permukaan</th>
+                                <td>SNI</td>
+                                <td>{{"RP " .number_format(500000,0,',','.');}}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" scope="row">1</th>
+                                <td>Sampling Kualitas Udara Ambien</th>
+                                <td>SNI</td>
+                                <td>{{"RP " .number_format(500000,0,',','.');}}</td>
+                            </tr>
+
+                                
+                        </tbody>
+                      </table>
                 </div>
                 {{-- <div class="col-lg-6 col-12 mb-3">
                     

@@ -137,6 +137,10 @@ Route::prefix('role')->group(function () {
 });
 
 Route::prefix('customer')->group(function () {
+
+    Route::post('/lupa-password', [CustomerController::class, 'lupaPassword'])->name('lupa.password');
+    Route::get('/lupa-password/{email}', [CustomerController::class, 'formLupaPassword'])->name('lupa.password.route');
+    Route::post('/password-baru', [CustomerController::class, 'newPassword'])->name('new.password');
     Route::get('/akun', [CustomerController::class, 'profil'])->name('customer.profil');
     Route::post('/akun', [CustomerController::class, 'updateProfil'])->name('customer.profil.edit');
     Route::get('/pesanan', [CustomerController::class, 'dataPesanan'])->name('customer.pesanan.index');

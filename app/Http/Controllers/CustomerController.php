@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LupaPassword;
 use App\Models\Layanan;
 use App\Models\Pesanan;
 use App\Models\StatusPesanan;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -109,5 +111,38 @@ class CustomerController extends Controller
         $user->password = $passwordHash;
         $user->update();
         return redirect()->route('customer.profil')->with('success', 'Berhasil mengubah password');
+    }
+    public function formLupaPassword($email)
+    {
+        return view('home-landing.customer.lupa-password',  [
+            'email' => $email
+        ]);
+    }
+    public function newPassword(Request $request)
+    {
+
+        $validateData = $request->validate([
+            'password' => 'min:8',
+            'konfirmasiPassword' => 'min:8'
+        ], [
+            'password.min' => 'minimal panjang password adalah 8',
+            'konfirmasiPassword.min' => 'minimal panjang password adalah 8',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return redirect()->route('login.customer')->with('success', 'Berhasil membuat password baru');
+    }
+    public function lupaPassword(Request $request)
+    {
+        // dd($request->all());
+        // dd(url('/lupaPassword'));
+        $dataEmail = [
+            'email' => $request->email,
+            'url' => url("/customer/lupa-password/$request->email")
+        ];
+        Mail::to([$request->email])->send(new LupaPassword($dataEmail));
+        return back()->with('success', 'Email sudah dikirim, silahkan cek email untuk mendapatkan link lupa password!');
     }
 }

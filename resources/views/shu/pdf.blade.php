@@ -49,23 +49,22 @@
                 </tr>
                 <tr>
                     <td style="font-size:10px;" class="col-3">7. Tanggal Penerimaan Sampel</td>
-
-                    <td style="font-size:10px;" class="col">: {{$order->tanggal_pengantaran  == null ? $order->tanggal_pengantaran : date("d M Y",  $order->tanggal_pengantaran)}}</td>
+                    <td style="font-size:10px;" class="col">: {{date_format(date_create($order->tanggal_pengantaran), 'd F Y');}}</td>
                 </tr>
                 <tr>
-                    <td style="font-size:10px;" class="col-3">9. Tanggal pengambilan Sampel</td>
+                    <td style="font-size:10px;" class="col-3">8. Tanggal pengambilan Sampel</td>
                     <td style="font-size:10px;" class="col">: {{date_format(date_create($order->tanggal_pengambilan), 'd F Y');}}</td>
                 </tr>
                 <tr>
-                    <td style="font-size:10px;" class="col-3">10. Lokasi Pengambilan Sampel</td>
+                    <td style="font-size:10px;" class="col-3">9. Lokasi Pengambilan Sampel</td>
                     <td style="font-size:10px;" class="col">: {{$order->alamat_pengambilan_sampel}}</td>
                 </tr>
                 <tr>
-                    <td style="font-size:10px;" class="col-3">11. Acuan Pengambilan Sampel</td>
+                    <td style="font-size:10px;" class="col-3">10. Acuan Pengambilan Sampel</td>
                     <td style="font-size:10px;" class="col">: {{$order->layanan->acuan_pengambilan_sampel}}</td>
                 </tr>
                 <tr>
-                    <td style="font-size:10px;" class="col-3">12. Deskripsi Sampel</td>
+                    <td style="font-size:10px;" class="col-3">11. Deskripsi Sampel</td>
                     <td style="font-size:10px;" class="col">: {{$order->layanan->nama_layanan}}</td>
                 </tr>
 
@@ -137,8 +136,9 @@
             Manager Teknis UPTD Laboratorium Lingkungan Dinas Lingkungan Hidup Kota Tangerang Selatan
             <br>
             @if ($order->status_pesanan == 'pengesahan_shu_selesai')
-            
-            <img class="pt-3" src="{{public_path('images/ttd/'. $ttd)}}" width="200" alt="">
+
+            <img src="{{public_path('/stempel/stempel.png')}}" width="200" style="float: left; margin-top: -110px" alt="" srcset="">
+            <img class="pt-3 mb-3 mt-4 ml-5" src="{{public_path('images/ttd/'. $ttd)}}" style="padding-left: 40px" width="250"  alt="">
             @else 
             <br>
             <br>
