@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-0">
         <div class="col">
             Catatan: 
             <table class="">
@@ -137,14 +137,13 @@
             <br>
             @if ($order->status_pesanan == 'pengesahan_shu_selesai')
 
-            <img src="{{public_path('/stempel/stempel.png')}}" width="200" style="float: left; margin-top: -110px" alt="" srcset="">
-            <img class="pt-3 mb-3 mt-4 ml-5" src="{{public_path('images/ttd/'. $ttd)}}" style="padding-left: 40px" width="250"  alt="">
+            <img src="{{public_path('/stempel/stempel.png')}}" width="150" style="float: left;margin-left:20px; margin-top: -80px" alt="" srcset="">
+            <img class="pt-3 mb-3 mt-4 ml-5" src="{{public_path('images/ttd/'. $ttd)}}" style="padding-left: 40px" width="200"  alt="">
             @else 
             <br>
             <br>
             <br>
             @endif
-
             <br>
             <strong><u>{{"(" .$managerTeknis .")"}}</u></strong>
         </div>
