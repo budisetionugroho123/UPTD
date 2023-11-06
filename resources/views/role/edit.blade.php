@@ -52,9 +52,12 @@
                     <div class="col-sm-10">
                     <select class="form-select" id="role" name="role">
                         <option value="{{$user->role}}">{{$user->role_label}}</option>
-                        @foreach ($roles as $role)
-                        <option value="{{$role->role}}">{{$role->label}}</option>
-                        @endforeach
+                        @if (auth()->user()->role == 'manager_teknis')
+
+                            @foreach ($roles as $role)
+                            <option value="{{$role->role}}">{{$role->label}}</option>
+                            @endforeach
+                        @endif
                     </select>
                     <small id="errorRole" class="text-danger text-italic d-none">Mohon pilih role</small>
                     </div>

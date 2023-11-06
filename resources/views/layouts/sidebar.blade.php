@@ -107,6 +107,8 @@
 
 
         <li class="nav-heading">Settings</li>
+        @if (auth()->user()->role == "manager_teknis" )
+
         <li class="nav-item " >
             <a class="nav-link  {{Request::route()->getName() == 'layanan.create'  || Request::route()->getName() =='layanan.list'? 'active-sidebar': 'collapsed'}}"  data-bs-target="#layanan-nav" data-bs-toggle="collapse"  href="#">
             <i class="fa fa-wrench" ></i><span>Layanan</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -125,20 +127,24 @@
             </li>
             </ul>
         </li>
+        @endif
         <li class="nav-item " >
             <a class="nav-link  {{Request::route()->getName() == 'role.list'  || Request::route()->getName() =='role.create'? 'active-sidebar': 'collapsed'}}"  data-bs-target="#role-nav" data-bs-toggle="collapse"  href="#">
             <i class="fa fa-users"></i><span>Peran</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             
             <ul id="role-nav" class="nav-content collapse {{Request::route()->getName() == 'role.create' || Request::route()->getName() == 'role.list' ? 'show': ''}} " data-bs-parent="#sidebar-nav">
-            <li>
-                <a href="{{route('role.create')}}">
-                <i class="bi bi-circle "></i><span class="{{Request::route()->getname() == 'role.create' ? 'active-dropdown' : ''}}">Tambah Pengguna</span>
-                </a>
-            </li>
+            @if (auth()->user()->role == "manager_teknis" )
+
+                <li>
+                    <a href="{{route('role.create')}}">
+                    <i class="bi bi-circle "></i><span class="{{Request::route()->getname() == 'role.create' ? 'active-dropdown' : ''}}">Tambah Pengguna</span>
+                    </a>
+                </li>
+            @endif
             <li>
                 <a href="{{route('role.list')}}">
-                <i class="bi bi-circle"></i><span class="{{Request::route()->getname() == 'role.list' ? 'active-dropdown' : ''}}">Daftar Pengguna</span>
+                <i class="bi bi-circle"></i><span class="{{Request::route()->getname() == 'role.list' ? 'active-dropdown' : ''}}">Pengguna</span>
                 </a>
             </li>
             </ul>

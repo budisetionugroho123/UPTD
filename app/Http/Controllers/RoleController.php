@@ -12,8 +12,13 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $this->authorize('kepala_lab');
-        $users = User::where('role', '!=', 'customer')->get();
+        $this->authorize('login');
+        if (auth()->user()->role == 'manager_teknis') {
+            $users = User::where('role', '!=', 'customer')->get();
+        } else {
+            $users = User::where('role', '!=', 'customer')->where('id', auth()->user()->id)->get();
+        }
+
         $titleConfirmDelete = 'Hapus Data!';
         $text = "kamu yakin untuk menghapus?";
         confirmDelete($titleConfirmDelete, $text);

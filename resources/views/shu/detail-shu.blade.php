@@ -81,7 +81,7 @@
                     </tbody>
                 </table >
                 <a href="{{route('generate.shu', $order->id)}}" class=" btn btn-sm btn-primary ml-5 pl-5 mt-3">Generate PDF</a>
-                <a href="{{route('validasi.shu', $order->id)}}" class=" btn btn-sm btn-primary ml-5 pl-5 mt-3">Validasi Shu</a>
+                <a href="{{route('validasi.shu', $order->id)}}" class=" btn btn-sm btn-primary ml-5 pl-5 mt-3">Pesanan Selesai</a>
 
             </form>
         </div>

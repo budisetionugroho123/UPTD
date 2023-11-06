@@ -136,7 +136,7 @@
             <div class="row">
 
             <div class="col-lg-6 order-1 order-lg-2">
-                <img src="/Green/assets/img/about.jpg" style="width: 70vh" class="img-fluid" alt="">
+                <img src="/image/about.jpg" style="width: 70vh" class="img-fluid" alt="">
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
                 {{-- <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3> --}}
@@ -269,7 +269,7 @@
             <div class="row mt-3">
 
                 <div class="col-lg-6 col-12 mb-3">
-                    <h4 class="text-center text-black">Uji Kualitas Air Higiene</h4>
+                    <h4 class="text-center text-black">Uji Kualitas Air Limbah</h4>
                     <table class="table  table-sm table-bordered ">
                         <thead  class="thead-dark">
                           <tr>

@@ -114,4 +114,11 @@ class HomeController extends Controller
 
         ]);
     }
+    public function sertifikat()
+    {
+        // dd("test");
+        return view('home-landing.sertifikat', [
+            'title' => 'Sertifikat'
+        ]);
+    }
 }

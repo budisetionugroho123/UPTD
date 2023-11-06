@@ -4,9 +4,9 @@
     <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
       <div class="d-flex justify-content-center py-4">
-        <a href="index.html" class="logo d-flex align-items-center w-auto">
-          <img src="/image/Logo_DPRD_kota_Tangsel.png" alt="">
-          <span class="d-none d-lg-block">UPTD</span>
+        <a href="index.html" class="logo d-flex align-items-center w-auto text-center">
+          {{-- <img src="/image/Logo_DPRD_kota_Tangsel.png" alt=""> --}}
+          <span class="d-none d-lg-block">UPTD LABORATORIUM LINGKUNGAN</span>
         </a>
       </div><!-- End Logo -->
 
@@ -43,7 +43,7 @@
               <button class="btn btn-primary w-100" type="submit">Masuk</button>
             </div>
             <div class="col-12">
-              <p class="small custom-button mb-0"> <a href="pages-register.html">Lupa password?</a></p>
+              <p class="small custom-button mb-0"> <a href="#" data-bs-toggle="modal" data-bs-target="#lupaPasswordModal">Lupa password?</a></p>
             </div>
           </form>
 
@@ -53,6 +53,34 @@
      
     </div>
   </div>
+  <!-- Modal -->
+<div class="modal fade" id="lupaPasswordModal" tabindex="-1" role="dialog" aria-labelledby="lupaPasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="lupaPasswordModalLabel">Lupa Password</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('send.email.password')}}" method="POST">
+        @csrf
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="email" required name="email" class="form-control" id="exampleInputEmail1"  placeholder="Masukkan email....">
+                <div class="invalid-feedback">
+                    Mohon masukkan email
+                  </div>
+            </div>              
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-primary">Kirim</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
   <script src="">
     
   </script>

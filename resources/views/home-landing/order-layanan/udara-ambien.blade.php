@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 order-1 ml-lg-5 order-lg-2 col-12">
-                <img src="/image/udara_ambien.jpg" class="img-fluid" alt="">
+                <img src="/image/layanan-udara.jpg" class="img-fluid" alt="">
             </div>
             
             <div class="col-lg-7 order-2 order-lg-1 col-12">

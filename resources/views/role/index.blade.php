@@ -3,8 +3,10 @@
 <div class="container bg-white" >
     <div class="row   justify-content-center">
         <div class="col-lg-10 m-5">
+            @if (auth()->user()->role == 'manager_teknis')
             <a href="" class="btn  btn-primary float-end mb-3"><i class="fas fa-plus"> Tambah </i></a>
-            <table class="table border" id="table">
+            @endif
+            <table class="table border w-100" id="table">
                 <thead >
                     <th>No</th>
                     <th>UUID</th>

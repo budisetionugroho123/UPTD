@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Gate::define('login', function (User $user) {
-            return $user->role != null;
+            return $user->role != null && $user->role != 'customer';
         });
         Gate::define('kepala_lab', function (User $user) {
             return $user->role == "manager_teknis";

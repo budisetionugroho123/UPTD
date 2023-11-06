@@ -29,6 +29,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
+
+
+
+Route::post('/lupapassword', [UserController::class, 'sendEmail'])->name('send.email.password')->middleware('guest');
+
+Route::get('/lab/lupa-password/{email}', [UserController::class, 'lupaPassword'])->name('lupa.password.lab')->middleware('guest');
+Route::post('/lab/lupa-password', [UserController::class, 'newPassword'])->name('new.password.lab')->middleware('guest');
 Route::get('/login', [UserController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [UserController::class, 'auth'])->name('login.auth');
 Route::get('/login-customer', [CustomerAuthController::class, 'loginCustomer'])->name('login.customer')->middleware('guest');
@@ -40,6 +48,7 @@ Route::get('/register-customer', [CustomerAuthController::class, 'registerCustom
 Route::post('/register-customer', [CustomerAuthController::class, 'createCustomer'])->name('register.customer.store');
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about']);
+Route::get('/sertifikat-lab', [HomeController::class, 'sertifikat'])->name('sertifikat');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 //order layanan
 Route::prefix('order-layanan')->group(function () {
