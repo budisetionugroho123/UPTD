@@ -80,8 +80,8 @@
                             <td>{{$order['total_harga']}}</td>
                             <td>{{$order['status_pembayaran']}}</td>
                             <td>
-                                <a href="{{route('order.cancel.detail', $order['id'])}}"><i class="fa fa-eye text-info"></i></a> | 
-                                <a href=""><i class="fas fa-trash text-danger"> </i></a>
+                                <a href="{{route('order.cancel.detail', $order['id'])}}"><i class="fa fa-eye text-info"></i></a> 
+                                {{-- <a href=""><i class="fas fa-trash text-danger"> </i></a> --}}
                             </td>
                         </tr>
                     @endforeach

@@ -49,8 +49,8 @@
                             <td>{{$order['status_pembayaran']}}</td>
                             <td><a href="{{route('generate.shu', $order['id'])}}">Generate PDF</a></td>
                             <td>
-                                <a href="{{route('detail.shu', $order['id'])}}"><i class="fa fa-eye text-info"></i></a> | 
-                                <a href=""><i class="fas fa-trash text-danger"> </i></a>
+                                <a href="{{route('detail.shu', $order['id'])}}"><i class="fa fa-eye text-info"></i></a> 
+                                {{-- <a href=""><i class="fas fa-trash text-danger"> </i></a> --}}
                             </td>
                         </tr>
                     @endforeach
