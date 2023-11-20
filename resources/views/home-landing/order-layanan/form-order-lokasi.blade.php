@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-3 order-lg-2">
                             <label for="no_pic">No Kontak/WA PIC</label>
-                            <input  onkeyup="removeError()" type="text" id="no_pic" name="no_pic" class="form-control  border-input">
+                            <input  onkeyup="removeError()" type="text" id="no_pic" oninput="validatePhoneNumber(event)" name="no_pic" class="form-control  border-input">
                             <div class="font-italic text-danger d-none" id="errorNoPic">
                                 Mohon masukkan kontak/wa PIC!
                               </div>                      
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-12 col-lg-6 mb-3 mb-lg-5 order-5 order-lg-5">
                             <label for="telephone">Telephone/Fax Perusahaan</label>
-                            <input  onkeyup="removeError()" type="text" id="telephone" name="telephone" class="form-control  border-input">       
+                            <input  onkeyup="removeError()" type="text" id="telephone" oninput="validatePhoneNumber(event)" name="telephone" class="form-control  border-input">       
                             <div class="font-italic text-danger d-none" id="errorTelephone">
                                 Mohon masukkan no telephone atau fax perusahaan!
                             </div>                 
@@ -137,5 +137,22 @@
     
         });
     </script> --}}
+    <script>
+        function validatePhoneNumber(event) {
+        // Mendapatkan nilai input
+        let input = event.target.value;
 
+        // Menghapus karakter non-angka
+        let numericInput = input.replace(/\D/g, '');
+
+        // Memastikan panjang maksimal adalah 12 digit
+        if (numericInput.length > 12) {
+            numericInput = numericInput.slice(0, 12);
+        }
+
+        // Menetapkan nilai input yang telah divalidasi
+        event.target.value = numericInput;
+        }
+
+    </script>
 @endsection

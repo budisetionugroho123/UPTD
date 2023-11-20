@@ -33,7 +33,7 @@
                   <div class="form-group row mb-3">
                     <label for="no_hp" class="col-sm-2 col-form-label">No Hp</label>
                     <div class="col-sm-10">
-                      <input type="text" name="no_hp" class="form-control" id="no_hp"  >
+                      <input type="text" name="no_hp" class="form-control" id="no_hp"   oninput="validatePhoneNumber(event)">
                       <small id="errorNoHp" class="text-danger text-italic d-none">Mohon masukkan no hp</small>
                     </div>
                   </div>
@@ -59,6 +59,24 @@
         </div>
     </div>
 </div>
+<script>
+  function validatePhoneNumber(event) {
+  // Mendapatkan nilai input
+  let input = event.target.value;
+
+  // Menghapus karakter non-angka
+  let numericInput = input.replace(/\D/g, '');
+
+  // Memastikan panjang maksimal adalah 12 digit
+  if (numericInput.length > 12) {
+    numericInput = numericInput.slice(0, 12);
+  }
+
+  // Menetapkan nilai input yang telah divalidasi
+  event.target.value = numericInput;
+}
+
+</script>
 <script>
     function submitRole(){
         var name= $("#name").val();

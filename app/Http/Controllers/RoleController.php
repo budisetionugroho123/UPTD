@@ -14,9 +14,9 @@ class RoleController extends Controller
     {
         $this->authorize('login');
         if (auth()->user()->role == 'manager_teknis') {
-            $users = User::where('role', '!=', 'customer')->get();
+            $users = User::get();
         } else {
-            $users = User::where('role', '!=', 'customer')->where('id', auth()->user()->id)->get();
+            $users = User::where('id', auth()->user()->id)->get();
         }
 
         $titleConfirmDelete = 'Hapus Data!';
