@@ -23,7 +23,7 @@
             </div>
             <div class="col-12">
                 <label for="no_hp" class="form-label">No Hp</label>
-                <input type="text" name="no_hp" class="form-control" required value="{{$user->no_hp}}" id="no_hp" required>
+                <input type="text" name="no_hp" class="form-control" oninput="validatePhoneNumber(event)" required value="{{$user->no_hp}}" id="no_hp" required>
             </div>
             {{-- <div class="col-12">
                 <label for="password" class="form-label">Password</label>
@@ -114,4 +114,22 @@
 
     }
 </script>
+<script>
+    function validatePhoneNumber(event) {
+    // Mendapatkan nilai input
+    let input = event.target.value;
+  
+    // Menghapus karakter non-angka
+    let numericInput = input.replace(/\D/g, '');
+  
+    // Memastikan panjang maksimal adalah 12 digit
+    if (numericInput.length > 12) {
+      numericInput = numericInput.slice(0, 12);
+    }
+  
+    // Menetapkan nilai input yang telah divalidasi
+    event.target.value = numericInput;
+  }
+  
+  </script>
 @endsection
